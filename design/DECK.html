@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>2D in 3D GDD deck</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- walker-viewport-2d-in-3d · GDD 0.1.0-recovered · 2026-09-27 · Zelda (agent, silent) for Nik Bear Brown · gate — unsigned at time of writing -->
+<style>
+:root{--bg:#faf9f5;--ink:#25354a;--muted:#5b6b7c;--teal:#287c68;--red:#d24e42;--card:#fffdf7;--rule:#daddd6;--amber:#8a6d1f}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:Helvetica,Arial,sans-serif}
+.slide{display:none;min-height:100vh;box-sizing:border-box;padding:56px 72px;max-width:1400px;margin:0 auto}
+.slide.on{display:block}
+h1{font-size:44px;margin:0 0 10px}h2{font-size:34px;margin:0 0 16px}
+.kicker{color:var(--muted);font-size:16px;letter-spacing:.04em;text-transform:uppercase;margin-bottom:18px}
+p,li{font-size:22px;line-height:1.4}li{margin:8px 0}
+.cap{color:var(--muted);font-size:15px;margin-top:6px}
+img{max-width:100%;border:1px solid var(--rule);background:#fff}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:14px;font-weight:700;margin-right:6px;vertical-align:2px}
+.obs{background:#e3f1ec;color:var(--teal)}.prop{background:#fdece9;color:var(--red);border:1px dashed var(--red)}.miss{background:#f6efdc;color:var(--amber)}
+table{border-collapse:collapse;font-size:18px;width:100%}td,th{border-bottom:1px solid var(--rule);padding:8px 10px;text-align:left;vertical-align:top}
+.big{font-size:96px;font-weight:700;color:var(--red);line-height:1}
+.zelda{border-left:6px solid var(--teal);padding-left:18px}
+.dash{border:2px dashed var(--red);padding:14px 18px;border-radius:8px;background:var(--card)}
+nav{position:fixed;bottom:14px;right:22px;color:var(--muted);font-size:14px}
+@media(max-width:800px){.slide{padding:24px 16px}h1{font-size:30px}h2{font-size:24px}p,li{font-size:17px}.big{font-size:56px}}
+</style></head><body>
+
+<section class="slide on">
+<div class="kicker">walker-viewport-2d-in-3d · GDD 0.1.0-recovered · 2026-09-27 · Zelda, silent</div>
+<h1>A Pong game painted onto a wall.</h1>
+<p>This is a tech demo, not a game. It proves one technique: a 2D scene rendered into a SubViewport, its texture put on a quad in a 3D room. Walker adaptation of the upstream Godot demo <code>viewport/2d_in_3d</code>.</p>
+<p><span class="tag obs">OBSERVED</span> in code or run records &nbsp; <span class="tag prop">PROPOSED</span> not built &nbsp; <span class="tag miss">MISSING</span> nobody has decided</p>
+<p class="cap">gate — unsigned at time of writing. No gate is signed. No human has played it. → GDD.md header · arrow keys or space to advance</p>
+</section>
+
+<section class="slide">
+<div class="kicker">What exists · GDD §1, R-04</div>
+<h2>The only picture is upstream's</h2>
+<img src="../godot/screenshots/2d_in_3d.webp" alt="Upstream screenshot: Pong on a quad between two pillars" style="max-height:62vh">
+<p class="cap"><span class="tag obs">OBSERVED</span> godot/screenshots/2d_in_3d.webp, shipped with the upstream demo. It is not a Walker capture and proves nothing about this adaptation's rendering (VERIFICATION.md:23-25).</p>
+</section>
+
+<section class="slide">
+<div class="kicker">What it demonstrates · GDD §1, §6 S-01</div>
+<h2>The 2D scene does not know it is in 3D</h2>
+<ul>
+<li><span class="tag obs">OBSERVED</span> Pong reads only its own viewport rect, 600×400 (pong.gd:18; tscn:77).</li>
+<li><span class="tag obs">OBSERVED</span> One line does the trick: the viewport texture becomes the quad's albedo (2d_in_3d.gd:15).</li>
+<li><span class="tag obs">OBSERVED</span> 93 lines of runtime script in total; one Walker change, a paddle clamp (pong.gd:58-59, 69).</li>
+<li><span class="tag miss">MISSING</span> Why Walker keeps it, and for whom. Q-01, Q-02.</li>
+</ul>
+</section>
+
+<section class="slide">
+<div class="kicker">The flow · GDD §3, S-01</div>
+<h2>Keys → SubViewport → quad → pixels nobody has seen</h2>
+<img src="diagrams/viewport-flow.svg" alt="Input to viewport to 3D flow">
+<p class="cap">Solid = observed. Dashed = the last hop, pixels on screen, unverified.</p>
+</section>
+
+<section class="slide">
+<div class="kicker">The loop · GDD §3, §5 M-01..M-05</div>
+<h2>Pong, every frame</h2>
+<img src="diagrams/pong-loop.svg" alt="Pong loop state diagram">
+<p class="cap">No score, no match end. Speed grows ×1.1 per hit with no cap. Both are open questions, not bugs yet.</p>
+</section>
+
+<section class="slide">
+<div class="kicker">Features and priority · GDD §11</div>
+<h2>CORE 4 of 8</h2>
+<div class="big">50%</div>
+<p>Over the 40% line. Demoting Pong rules gives 37.5% but leaves a frozen ball as the "live" 2D scene. <span class="tag miss">MISSING</span> Nik Bear Brown picks: reduced MVP or accept the overage. Q-09.</p>
+<img src="diagrams/feature-map.svg" alt="Feature and dependency map">
+</section>
+
+<section class="slide">
+<div class="kicker">Verification evidence · GDD §16</div>
+<h2>Every state check passes. No pixel check exists.</h2>
+<table>
+<tr><th>Check</th><th>Record</th></tr>
+<tr><td><span class="tag obs">OBSERVED</span> Import + 120-frame idle, Godot 4.7.2, exit 0</td><td>FRICTIONAL.md:6-7</td></tr>
+<tr><td><span class="tag obs">OBSERVED</span> T-01 keys move the right paddles; texture identity; 600×400; centres held in 0..400</td><td>FRICTIONAL.md:15-28</td></tr>
+<tr><td><span class="tag obs">OBSERVED</span> T-02 rebound at 88; miss resets to (300,200), 80, LEFT</td><td>FRICTIONAL.md:31-36</td></tr>
+<tr><td><span class="tag obs">OBSERVED</span> T-03 rally: one run exit 1 (no roof), one run exit 0</td><td>FRICTIONAL.md:39-49</td></tr>
+<tr><td><span class="tag prop">PROPOSED</span> T-04 GPU pixels on the quad</td><td>none; blocked, Q-11</td></tr>
+<tr><td><span class="tag prop">PROPOSED</span> Human capture and two 4K films</td><td>pending, VERIFICATION.md:21-30</td></tr>
+</table>
+<p class="cap">Human playtests on record: 0. No *.log files kept; session ids live only in FRICTIONAL.md prose.</p>
+</section>
+
+<section class="slide">
+<div class="kicker">Top 3 risks · GDD §14</div>
+<h2>What can go wrong</h2>
+<ol>
+<li><b>R-01</b> The demo's only claim, pixels on the quad, is unverified. A bound texture is not visible output.</li>
+<li><b>R-02</b> <span class="tag" style="background:#eef1f4;color:#5b6b7c">INFERRED</span> Unbounded ×1.1 speed-up and an 8 px paddle: past ~480 px/s at 60 fps the ball can tunnel through, about 19 hits in.</li>
+<li><b>R-03</b> Rally coverage is random; one 30 s run missed the roof and exited 1.</li>
+</ol>
+</section>
+
+<section class="slide">
+<div class="kicker">Open questions · decisions.md</div>
+<h2>14 open, 2 that block</h2>
+<div class="dash">
+<p><span class="tag miss">MISSING</span> <b>Q-01</b> Why is this demo in Walker, and what should it teach or prove?</p>
+<p><span class="tag miss">MISSING</span> <b>Q-11</b> What clears the visible-recording blocker so pixels can be checked?</p>
+</div>
+<p class="cap">Also open: audience, pillars, PX goals, score, speed cap, paddle bound, camera axis quirk, CORE overage, film acceptance, quad input, timeline, upstream diff policy. Owner for all: Nik Bear Brown.</p>
+</section>
+
+<section class="slide zelda">
+<div class="kicker">Zelda's read · GDD Zelda's notes</div>
+<h2>Clean, small, tested where it can be. The trick is the part nobody has seen.</h2>
+<ul>
+<li>Ghost Center is expected for a demo; it still means nobody can call this folder done.</li>
+<li>The tests are honest about edges. The rendering path has no unhappy-path coverage at all.</li>
+<li>Completeness Fallacy is the live risk: all-green state checks read like "done". The folder itself says they are not.</li>
+<li><b>First fix: answer Q-11 and run T-04.</b> Everything else is decoration on an unverified claim.</li>
+</ul>
+</section>
+
+<nav id="n"></nav>
+<script>
+var s=document.querySelectorAll('.slide'),i=0,n=document.getElementById('n');
+function go(k){s[i].classList.remove('on');i=(k+s.length)%s.length;s[i].classList.add('on');n.textContent=(i+1)+' / '+s.length;window.scrollTo(0,0);if(location.hash!=='#'+(i+1))history.replaceState(null,'','#'+(i+1));}
+function fromHash(){var h=parseInt(location.hash.slice(1),10);return isNaN(h)?null:h-1}
+var h0=fromHash();go(h0!==null?h0:0);
+window.addEventListener('hashchange',function(){var h=fromHash();if(h!==null)go(h)});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){e.preventDefault();go(i+1)}if(e.key==='ArrowLeft'||e.key==='PageUp')go(i-1);if(e.key==='Home')go(0);if(e.key==='End')go(s.length-1)});
+document.addEventListener('click',function(e){if(e.clientX>innerWidth*0.7)go(i+1);else if(e.clientX<innerWidth*0.3)go(i-1)});
+</script>
+</body></html>

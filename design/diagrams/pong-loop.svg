@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="720" viewBox="0 0 1500 720" role="img" aria-labelledby="t d">
+<title id="t">Pong loop inside the SubViewport, recovered from godot/pong.gd</title>
+<desc id="d">Per-frame ball loop: serve, travel, roof/floor flip, paddle hit with x1.1 speed, miss and reset; paddles move from input and are clamped; score and speed cap are open questions. References M-01..M-05, F-04, F-05, Q-05, Q-06, R-02.</desc>
+<rect width="1500" height="720" fill="#faf9f5"/>
+<defs>
+<marker id="ai" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#287c68"/></marker>
+<marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d24e42"/></marker>
+</defs>
+<g font-family="Helvetica, Arial, sans-serif" fill="#25354a">
+<text x="40" y="50" font-size="30" font-weight="700">Pong loop · every _process frame · F-04</text>
+<text x="40" y="80" font-size="15" fill="#5b6b7c">solid teal = observed in godot/pong.gd · dashed red = open question, not built</text>
+<g stroke="#287c68" stroke-width="2.5" fill="#fffdf7">
+<ellipse cx="200" cy="360" rx="140" ry="60"/>
+<ellipse cx="640" cy="360" rx="150" ry="60"/>
+<ellipse cx="640" cy="160" rx="170" ry="52"/>
+<ellipse cx="1100" cy="360" rx="190" ry="60"/>
+<ellipse cx="640" cy="580" rx="170" ry="56"/>
+</g>
+<g font-size="20" font-weight="700" text-anchor="middle">
+<text x="200" y="352">SERVE</text>
+<text x="640" y="352">BALL IN PLAY</text>
+<text x="640" y="152">ROOF / FLOOR FLIP</text>
+<text x="1100" y="352">PADDLE HIT</text>
+<text x="640" y="572">MISS</text>
+</g>
+<g font-size="14" text-anchor="middle">
+<text x="200" y="376">(300,200) · 80 px/s · LEFT</text>
+<text x="200" y="396">pong.gd:4,10 · tscn:88</text>
+<text x="640" y="376">pos += dir * speed * delta</text>
+<text x="640" y="396">pong.gd:29 · M-01</text>
+<text x="640" y="176">dir.y = -dir.y · pong.gd:32-33 · M-02</text>
+<text x="1100" y="376">reverse x, speed x1.1, random y</text>
+<text x="1100" y="396">pong.gd:36-40 · M-03</text>
+<text x="640" y="596">x &lt; 0 or x &gt; 600 · pong.gd:43 · M-04</text>
+</g>
+<g stroke="#287c68" stroke-width="3" fill="none" marker-end="url(#ai)">
+<line x1="340" y1="360" x2="486" y2="360"/>
+<path d="M600 302 L600 214"/>
+<path d="M680 212 L680 300"/>
+<path d="M790 345 L906 345"/>
+<path d="M910 380 L794 380"/>
+<path d="M640 420 L640 520"/>
+<path d="M470 580 C 250 580 200 500 200 424"/>
+</g>
+<text x="270" y="665" font-size="14">reset to centre, 80, LEFT · pong.gd:44-46</text>
+<rect x="1180" y="520" width="280" height="110" rx="10" fill="#fffdf7" stroke="#287c68" stroke-width="2.5"/>
+<text x="1320" y="552" font-size="18" font-weight="700" text-anchor="middle">PADDLES (parallel)</text>
+<text x="1320" y="576" font-size="14" text-anchor="middle">150 px/s from input · pong.gd:50-67</text>
+<text x="1320" y="598" font-size="14" text-anchor="middle">clamp centre 0..400 · pong.gd:59,69</text>
+<text x="1320" y="620" font-size="14" text-anchor="middle">M-05 · F-05 (Walker change)</text>
+<g stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7" fill="#fffdf7">
+<rect x="1020" y="120" width="300" height="90" rx="10"/>
+<rect x="40" y="520" width="200" height="90" rx="10"/>
+</g>
+<g font-size="14" text-anchor="middle" fill="#d24e42">
+<text x="1170" y="152" font-weight="700">speed cap? Q-06</text>
+<text x="1170" y="174">no cap today; tunnelling past</text>
+<text x="1170" y="194">~480 px/s is inferred, R-02</text>
+<text x="140" y="552" font-weight="700">score / match end?</text>
+<text x="140" y="574">none in code · Q-05</text>
+</g>
+<line x1="1100" y1="300" x2="1140" y2="214" stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7" marker-end="url(#ar)"/>
+<line x1="470" y1="600" x2="244" y2="580" stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7" marker-end="url(#ar)"/>
+</g>
+</svg>

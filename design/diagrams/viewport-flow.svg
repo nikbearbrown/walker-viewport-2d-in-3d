@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="640" viewBox="0 0 1500 640" role="img" aria-labelledby="t d">
+<title id="t">Input to viewport to 3D flow, recovered from godot/2d_in_3d.gd and godot/pong.gd</title>
+<desc id="d">Keys drive Pong inside a 600x400 SubViewport; its ViewportTexture is bound to the quad material once at _ready; the camera sways; pixels on screen are unverified. References F-01, F-02, F-03, F-07, S-01, S-03, T-01, T-04, R-01.</desc>
+<rect width="1500" height="640" fill="#faf9f5"/>
+<defs>
+<marker id="ai" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#287c68"/></marker>
+<marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d24e42"/></marker>
+</defs>
+<g font-family="Helvetica, Arial, sans-serif" fill="#25354a">
+<text x="40" y="50" font-size="30" font-weight="700">Input → SubViewport → quad → screen · S-01</text>
+<text x="40" y="80" font-size="15" fill="#5b6b7c">solid teal = observed in code · dashed red = proposed / unverified · headless tests (T-01) verified the solid links up to the quad material, not the pixels</text>
+<g stroke="#287c68" stroke-width="2.5" fill="#fffdf7">
+<rect x="40" y="200" width="220" height="130" rx="10"/>
+<rect x="330" y="200" width="260" height="130" rx="10"/>
+<rect x="660" y="200" width="240" height="130" rx="10"/>
+<rect x="970" y="200" width="220" height="130" rx="10"/>
+<rect x="660" y="420" width="240" height="110" rx="10"/>
+</g>
+<rect x="1250" y="200" width="210" height="130" rx="10" fill="#fffdf7" stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7"/>
+<g font-size="20" font-weight="700" text-anchor="middle">
+<text x="150" y="240">Keys W S Up Down</text>
+<text x="460" y="240">Pong (Node2D)</text>
+<text x="780" y="240">ViewportTexture</text>
+<text x="1080" y="240">ViewportQuad</text>
+<text x="780" y="460">Camera3D idle</text>
+<text x="1355" y="240">Pixels on screen</text>
+</g>
+<g font-size="14" text-anchor="middle" fill="#25354a">
+<text x="150" y="268">4 actions, physical keys</text>
+<text x="150" y="290">project.godot:24-45</text>
+<text x="150" y="312">S-03 · F-03</text>
+<text x="460" y="268">inside SubViewport 600x400</text>
+<text x="460" y="290">update mode 4 · tscn:76-81</text>
+<text x="460" y="312">pong.gd:22-70 · F-01</text>
+<text x="780" y="268">viewport.get_texture()</text>
+<text x="780" y="290">bound once in _ready</text>
+<text x="780" y="312">2d_in_3d.gd:11-15 · F-02</text>
+<text x="1080" y="268">PlaneMesh, albedo_texture</text>
+<text x="1080" y="290">3:2 scale · tscn:71-74</text>
+<text x="1080" y="312">identity checked by T-01</text>
+<text x="780" y="488">sin/cos sway, 0.005 rad</text>
+<text x="780" y="510">2d_in_3d.gd:18-23 · F-07</text>
+<text x="1355" y="268">never captured</text>
+<text x="1355" y="290">VERIFICATION.md:23-25</text>
+<text x="1355" y="312">T-04 proposed · R-01</text>
+</g>
+<g stroke="#287c68" stroke-width="3" fill="none" marker-end="url(#ai)">
+<line x1="260" y1="265" x2="326" y2="265"/>
+<line x1="590" y1="265" x2="656" y2="265"/>
+<line x1="900" y1="265" x2="966" y2="265"/>
+<path d="M900 470 C 1080 470 1080 400 1080 334"/>
+</g>
+<line x1="1190" y1="265" x2="1246" y2="265" stroke="#d24e42" stroke-width="3" stroke-dasharray="10 7" marker-end="url(#ar)"/>
+<text x="1000" y="420" font-size="14" fill="#5b6b7c">views the quad</text>
+<text x="40" y="600" font-size="15" fill="#5b6b7c">Screenshot in godot/screenshots is upstream's, not a Walker capture (R-04). Pong reads only its own viewport rect (pong.gd:18); it does not know it is in 3D.</text>
+</g>
+</svg>

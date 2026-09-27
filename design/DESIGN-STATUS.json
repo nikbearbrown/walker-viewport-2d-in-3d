@@ -1,0 +1,22 @@
+{
+  "game": "walker-viewport-2d-in-3d",
+  "kind": "tech-demo",
+  "mode": "recovered",
+  "revision": 1,
+  "design_version": "0.1.0-recovered",
+  "date": "2026-09-27",
+  "gate_note": "gate — unsigned at time of writing",
+  "recovered_from": {"path": "godot", "pass": "reverse, silent", "upstream_commit": "a3b5c113112f77291d5f3d1360f33a882fdc52f7"},
+  "engine": {"name": "godot", "version": "4.7 (config/features); headless runs used 4.7.2 per FRICTIONAL.md:6", "renderer": "gl_compatibility"},
+  "gates": {
+    "vision":  {"signed_by": null, "date": null, "revision": null},
+    "systems": {"signed_by": null, "date": null, "revision": null},
+    "world":   {"signed_by": null, "date": null, "revision": null},
+    "scope":   {"signed_by": null, "date": null, "revision": null}
+  },
+  "core_percentage": {"core": 4, "total": 8, "percent": 50, "over_limit": true, "decision": "Q-09 open"},
+  "edu_track": false,
+  "human_playtests": 0,
+  "missing_count": 14,
+  "notes": "Silent recovery. Nothing here is approved. Gates are signed by humans only."
+}

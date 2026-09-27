@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="660" viewBox="0 0 1500 660" role="img" aria-labelledby="t d">
+<title id="t">Feature and dependency map with verification status</title>
+<desc id="d">Features F-01..F-08 with their dependencies; CORE 4 of 8; proposed tests T-04..T-08 and the planned films dashed. References F-01..F-08, T-01..T-08, Q-09, Q-10, Q-11.</desc>
+<rect width="1500" height="660" fill="#faf9f5"/>
+<defs>
+<marker id="ai" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#287c68"/></marker>
+<marker id="ar" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#d24e42"/></marker>
+</defs>
+<g font-family="Helvetica, Arial, sans-serif" fill="#25354a">
+<text x="40" y="50" font-size="30" font-weight="700">Features, dependencies, evidence · CORE 4/8 = 50% (Q-09)</text>
+<text x="40" y="80" font-size="15" fill="#5b6b7c">solid teal = implemented · thick border = CORE · "hl" = verified headless (state, not pixels) · dashed red = proposed or planned, not built</text>
+<g fill="#fffdf7" stroke="#287c68">
+<rect x="60" y="140" width="250" height="90" rx="10" stroke-width="5"/>
+<rect x="60" y="300" width="250" height="90" rx="10" stroke-width="5"/>
+<rect x="420" y="140" width="250" height="90" rx="10" stroke-width="5"/>
+<rect x="420" y="300" width="250" height="90" rx="10" stroke-width="5"/>
+<rect x="780" y="140" width="250" height="90" rx="10" stroke-width="2.5"/>
+<rect x="780" y="300" width="250" height="90" rx="10" stroke-width="2.5"/>
+<rect x="60" y="460" width="250" height="90" rx="10" stroke-width="2.5"/>
+<rect x="420" y="460" width="250" height="90" rx="10" stroke-width="2.5"/>
+</g>
+<g font-size="18" font-weight="700" text-anchor="middle">
+<text x="185" y="175">F-03 Keyboard paddles</text>
+<text x="185" y="335">F-04 Pong rules</text>
+<text x="545" y="175">F-01 Pong in SubViewport</text>
+<text x="545" y="335">F-02 Texture on quad</text>
+<text x="905" y="175">F-06 3D stage</text>
+<text x="905" y="335">F-07 Camera idle</text>
+<text x="185" y="495">F-05 Centre clamp</text>
+<text x="545" y="495">F-08 Test harness</text>
+</g>
+<g font-size="14" text-anchor="middle">
+<text x="185" y="200">CORE · hl T-01</text>
+<text x="185" y="360">CORE · hl T-02, T-03</text>
+<text x="545" y="200">CORE · hl size T-01</text>
+<text x="545" y="360">CORE · hl identity only</text>
+<text x="905" y="200">NICE · unverified</text>
+<text x="905" y="360">NICE · unverified</text>
+<text x="185" y="520">IMPORTANT · Walker change · hl</text>
+<text x="545" y="520">IMPORTANT · T-01..T-03</text>
+</g>
+<g stroke="#287c68" stroke-width="3" fill="none" marker-end="url(#ai)">
+<line x1="310" y1="185" x2="416" y2="185"/>
+<line x1="310" y1="345" x2="416" y2="200"/>
+<line x1="545" y1="230" x2="545" y2="296"/>
+<path d="M60 505 L30 505 L30 170 L56 170"/>
+<line x1="780" y1="345" x2="674" y2="345"/>
+</g>
+<g fill="#fffdf7" stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7">
+<rect x="1130" y="140" width="320" height="90" rx="10"/>
+<rect x="1130" y="300" width="320" height="90" rx="10"/>
+<rect x="1130" y="460" width="320" height="90" rx="10"/>
+</g>
+<g font-size="16" text-anchor="middle" fill="#d24e42">
+<text x="1290" y="175" font-weight="700">T-04 pixel readback</text>
+<text x="1290" y="200">blocked on Q-11 · R-01</text>
+<text x="1290" y="335" font-weight="700">T-05..T-07 speed, idle, seed</text>
+<text x="1290" y="360">Q-06, Q-08</text>
+<text x="1290" y="495" font-weight="700">T-08 capture + two 4K films</text>
+<text x="1290" y="520">pending · Q-10</text>
+</g>
+<g stroke="#d24e42" stroke-width="2.5" stroke-dasharray="10 7" fill="none" marker-end="url(#ar)">
+<path d="M670 330 C 900 260 1000 200 1126 190"/>
+<line x1="670" y1="505" x2="1126" y2="505"/>
+<line x1="1290" y1="230" x2="1290" y2="296"/>
+<line x1="1290" y1="390" x2="1290" y2="456"/>
+</g>
+<text x="40" y="620" font-size="15" fill="#5b6b7c">Arrows read "feeds". Human playtests on record: 0. No *.log files; run evidence is FRICTIONAL.md and VERIFICATION.md prose.</text>
+</g>
+</svg>
